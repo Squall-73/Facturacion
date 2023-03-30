@@ -17,8 +17,7 @@ public class ClientsModel {
     private String name;
     private String lastname;
     @NotNull
-	@Min(0)
-    @Column(unique = true, name="docnumber")
+	@Column(unique = true, name="docnumber")
 	private String docNumber;
 
 
