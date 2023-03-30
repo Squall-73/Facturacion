@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "clients")
 public class ClientsModel {
 
     @Id
@@ -17,7 +18,7 @@ public class ClientsModel {
     private String lastname;
     @NotNull
 	@Min(0)
-    @Column(unique = true)
+    @Column(unique = true, name="docnumber")
 	private String docNumber;
 
 

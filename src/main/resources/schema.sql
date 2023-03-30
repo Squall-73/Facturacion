@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS clients(
     id int NOT NULL AUTO_INCREMENT,
     name varchar(75),
     lastname varchar(75),
-    docnumber varchar(11) NOT NULL UNIQUE,
+    docNumber varchar(11) NOT NULL UNIQUE,
     PRIMARY KEY (id));
 
 
@@ -29,12 +29,12 @@ CREATE TABLE IF NOT EXISTS products(
 
 
 CREATE TABLE IF NOT EXISTS invoice_details(
-    invoice_detail_id int NOT NULL AUTO_INCREMENT,
+    invoice_details_id int NOT NULL AUTO_INCREMENT,
     invoice_id int NOT NULL,
     amount int,
     product_id int NOT NULL,
     price double,
-    PRIMARY KEY (invoice_detail_id),
+    PRIMARY KEY (invoice_details_id),
     CONSTRAINT fk_id_product_tbl FOREIGN KEY(product_id) REFERENCES products(id),
     CONSTRAINT fk_id_invoice_tbl FOREIGN KEY(invoice_id) REFERENCES invoice(id)
     );

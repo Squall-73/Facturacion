@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "Invoice_Details")
 public class InvoiceDetailsModel {
 
     @Id
