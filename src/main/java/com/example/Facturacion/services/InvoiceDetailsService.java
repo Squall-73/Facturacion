@@ -1,5 +1,6 @@
 package com.example.Facturacion.services;
 
+import com.example.Facturacion.entities.ClientsModel;
 import com.example.Facturacion.entities.InvoiceDetailsModel;
 import com.example.Facturacion.exception.IdNotValidException;
 import com.example.Facturacion.exception.NotFoundException;
@@ -69,6 +70,24 @@ public class InvoiceDetailsService {
 	//Método para buscar todos los invoice details.
 	public List<InvoiceDetailsModel> findAll(){
 		return this.invoiceDetailsRepository.findAll();
+	}
+
+	public InvoiceDetailsModel delete(Long id) throws Exception {
+		if (id <= 0){
+			throw new IdNotValidException("El id brindado no es valido.");
+		}
+
+		Optional<InvoiceDetailsModel> invoiceDetailsOp = this.invoiceDetailsRepository.findById(id);
+
+		if (invoiceDetailsOp.isEmpty()){
+			log.info("El invoice detail con el id brindado no existe en la base de datos: " + id);
+			throw new NotFoundException("El invoice detail que intenta solicitar no existe.");
+		}else {
+			log.info("El Id Ingresado: " + id + " ha sido eliminado.");
+			invoiceDetailsOp.get().setStatus(false);
+			invoiceDetailsRepository.save(invoiceDetailsOp.get());
+			return invoiceDetailsOp.get();
+		}
 	}
 
 }

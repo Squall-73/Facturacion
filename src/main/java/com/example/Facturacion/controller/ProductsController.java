@@ -37,5 +37,9 @@ public class ProductsController {
 	public ResponseEntity<List<ProductsModel>> findAll(){
 		return new ResponseEntity<>(this.productsService.findAll(), HttpStatus.OK);
 	}
-
+	@DeleteMapping(path = "/delete/{id}")
+	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
+		productsService.delete(id);
+		return ResponseEntity.ok("Producto " + id + " eliminado correctamente.");
+	}
 }

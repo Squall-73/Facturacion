@@ -77,4 +77,21 @@ public class ClientsService {
 		return this.clientRepository.findAll();
 	}
 
+	public ClientsModel delete(Long id) throws Exception {
+		if (id <= 0){
+			throw new IdNotValidException("El id brindado no es valido.");
+		}
+
+		Optional<ClientsModel> clientOp = this.clientRepository.findById(id);
+
+		if (clientOp.isEmpty()){
+			log.info("El cliente con el id brindado no existe en la base de datos: " + id);
+			throw new NotFoundException("El cliente que intenta solicitar no existe.");
+		}else {
+			log.info("El Id Ingresado: " + id + " ha sido eliminado.");
+			clientOp.get().setStatus(false);
+			clientRepository.save(clientOp.get());
+			return clientOp.get();
+		}
+	}
 }

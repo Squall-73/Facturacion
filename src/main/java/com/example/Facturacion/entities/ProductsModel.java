@@ -2,6 +2,7 @@ package com.example.Facturacion.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -19,4 +20,6 @@ public class ProductsModel {
     private int stock;
 	@Min(0)
     private double price;
+	@NotNull
+	private boolean status =true;
 }

@@ -1,8 +1,8 @@
 package com.example.Facturacion.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+
 import lombok.Data;
 
 
@@ -19,6 +19,8 @@ public class ClientsModel {
     @NotNull
 	@Column(unique = true, name="docnumber")
 	private String docNumber;
+	@NotNull
+	private boolean status =true;
 
 
 

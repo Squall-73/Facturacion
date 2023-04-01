@@ -2,6 +2,7 @@ package com.example.Facturacion.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
@@ -20,5 +21,7 @@ public class InvoiceModel {
     @ManyToOne
     @JoinColumn(name="client_id")
      private ClientsModel clientsModel;
+	@NotNull
+	private boolean status =true;
 
 }

@@ -80,5 +80,22 @@ public class ProductsService {
 		return this.productsRepository.findAll();
 	}
 
+	public ProductsModel delete(Long id) throws Exception {
+		if (id <= 0){
+			throw new IdNotValidException("El id brindado no es valido.");
+		}
+
+		Optional<ProductsModel> producstOp = this.productsRepository.findById(id);
+
+		if (producstOp.isEmpty()){
+			log.info("El producto con el id brindado no existe en la base de datos: " + id);
+			throw new NotFoundException("El producto que intenta solicitar no existe.");
+		}else {
+			log.info("El Id Ingresado: " + id + " ha sido eliminado.");
+			producstOp.get().setStatus(false);
+			productsRepository.save(producstOp.get());
+			return producstOp.get();
+		}
+	}
 
 }

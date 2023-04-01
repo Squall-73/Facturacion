@@ -2,6 +2,7 @@ package com.example.Facturacion.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -22,4 +23,6 @@ public class InvoiceDetailsModel {
     @ManyToOne
     @JoinColumn(name="product_id")
     private ProductsModel product;
+	@NotNull
+	private boolean status =true;
 }

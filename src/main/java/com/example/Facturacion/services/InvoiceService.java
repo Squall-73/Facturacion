@@ -1,5 +1,6 @@
 package com.example.Facturacion.services;
 
+import com.example.Facturacion.entities.InvoiceDetailsModel;
 import com.example.Facturacion.entities.InvoiceModel;
 import com.example.Facturacion.exception.IdNotValidException;
 import com.example.Facturacion.exception.NotFoundException;
@@ -68,6 +69,25 @@ public class InvoiceService {
 	public List<InvoiceModel> findAll(){
 		return this.invoiceRepository.findAll();
 	}
+
+	public InvoiceModel delete(Long id) throws Exception {
+		if (id <= 0){
+			throw new IdNotValidException("El id brindado no es valido.");
+		}
+
+		Optional<InvoiceModel> invoiceOp = this.invoiceRepository.findById(id);
+
+		if (invoiceOp.isEmpty()){
+			log.info("El invoice con el id brindado no existe en la base de datos: " + id);
+			throw new NotFoundException("El invoice que intenta solicitar no existe.");
+		}else {
+			log.info("El Id Ingresado: " + id + " ha sido eliminado.");
+			invoiceOp.get().setStatus(false);
+			invoiceRepository.save(invoiceOp.get());
+			return invoiceOp.get();
+		}
+	}
+
 
 }
 

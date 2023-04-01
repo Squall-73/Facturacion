@@ -35,5 +35,8 @@ public class InvoiceDetailController {
 		return new ResponseEntity<>(this.invoiceDetailsService.findAll(), HttpStatus.OK);
 	}
 
-
-}
+	@DeleteMapping(path = "/delete/{id}")
+	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
+		invoiceDetailsService.delete(id);
+		return ResponseEntity.ok("Invoice Detail " + id + " eliminado correctamente.");
+	}}
