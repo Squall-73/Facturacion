@@ -1,7 +1,6 @@
 package com.example.Facturacion.controller;
 
 import com.example.Facturacion.entities.ClientsModel;
-import com.example.Facturacion.exception.AlreadyExistsException;
 import com.example.Facturacion.services.ClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ public class ClientsController {
 	private ClientsService clientsService;
 
 	@PostMapping(path = "/")
-	public ResponseEntity<ClientsModel> create(@RequestBody ClientsModel client) throws AlreadyExistsException {
+		public ResponseEntity<ClientsModel> create(@RequestBody ClientsModel client) throws Exception {
 		return new ResponseEntity<>(this.clientsService.create(client), HttpStatus.OK);
 	}
 
@@ -31,6 +30,12 @@ public class ClientsController {
 	public ResponseEntity<ClientsModel> findById(@PathVariable Long id) throws Exception {
 
 		return new ResponseEntity<>(this.clientsService.findById(id), HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/doc/{docNumber}")
+	public ResponseEntity<ClientsModel> findById(@PathVariable String docNumber) throws Exception {
+
+		return new ResponseEntity<>(this.clientsService.findByDocNumber(docNumber), HttpStatus.OK);
 	}
 
 	@GetMapping(path = "/")

@@ -1,7 +1,7 @@
 package com.example.Facturacion.controller;
 
+
 import com.example.Facturacion.entities.InvoiceModel;
-import com.example.Facturacion.exception.AlreadyExistsException;
 import com.example.Facturacion.services.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +17,10 @@ public class InvoiceController {
 	@Autowired
 	private InvoiceService invoiceService;
 
-	@PostMapping(path = "/")
-	public ResponseEntity<InvoiceModel> create(@RequestBody InvoiceModel invoice) throws AlreadyExistsException {
-		return new ResponseEntity<>(this.invoiceService.create(invoice), HttpStatus.OK);
-	}
 
-	@PutMapping(path = "/{id}")
-	public ResponseEntity<InvoiceModel> update(@RequestBody InvoiceModel invoice, @PathVariable Long id) throws Exception {
-		return new ResponseEntity<>(this.invoiceService.update(invoice,id), HttpStatus.OK);
+	@PostMapping(path = "/")
+	public ResponseEntity<InvoiceModel> create(@RequestBody InvoiceModel invoice) throws Exception {
+		return new ResponseEntity<>(this.invoiceService.create(invoice), HttpStatus.OK);
 	}
 
 	@GetMapping(path = "/{id}")
@@ -37,12 +33,6 @@ public class InvoiceController {
 	public ResponseEntity<List<InvoiceModel>> findAll(){
 		return new ResponseEntity<>(this.invoiceService.findAll(), HttpStatus.OK);
 	}
-	@DeleteMapping(path = "/delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
-		invoiceService.delete(id);
-		return ResponseEntity.ok("Invoice " + id + " eliminado correctamente.");
-	}
-
 
 
 }

@@ -1,13 +1,11 @@
 package com.example.Facturacion.controller;
 
 import com.example.Facturacion.entities.ProductsModel;
-import com.example.Facturacion.exception.AlreadyExistsException;
 import com.example.Facturacion.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -18,7 +16,7 @@ public class ProductsController {
 	private ProductsService productsService;
 
 	@PostMapping(path = "/")
-	public ResponseEntity<ProductsModel> create(@RequestBody ProductsModel product) throws AlreadyExistsException {
+	public ResponseEntity<ProductsModel> create(@RequestBody ProductsModel product) throws Exception {
 		return new ResponseEntity<>(this.productsService.create(product), HttpStatus.OK);
 	}
 
@@ -33,10 +31,17 @@ public class ProductsController {
 		return new ResponseEntity<>(this.productsService.findById(id), HttpStatus.OK);
 	}
 
+	@GetMapping(path = "/code/{code}")
+	public ResponseEntity<ProductsModel> findByCode (@PathVariable String code) throws Exception {
+
+		return new ResponseEntity<>(this.productsService.findByCode(code), HttpStatus.OK);
+	}
+
 	@GetMapping(path = "/")
 	public ResponseEntity<List<ProductsModel>> findAll(){
 		return new ResponseEntity<>(this.productsService.findAll(), HttpStatus.OK);
 	}
+
 	@DeleteMapping(path = "/delete/{id}")
 	public ResponseEntity<String> delete(@PathVariable Long id) throws Exception{
 		productsService.delete(id);

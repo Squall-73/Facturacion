@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalHandlerException {
 
 	@ExceptionHandler(AlreadyExistsException.class)
-	public ResponseEntity<?> clientAlreadyExistsException(Exception e){
+	public ResponseEntity<?> alreadyExistsException(Exception e){
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
@@ -18,7 +18,32 @@ public class GlobalHandlerException {
 	}
 
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<?> clientNotFoundException(Exception e){
+	public ResponseEntity<?> notFoundException(Exception e){
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(MinException.class)
+	public ResponseEntity<?> minException(Exception e){
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(NullException.class)
+	public ResponseEntity<?> nullException(Exception e){
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(TooShortException.class)
+	public ResponseEntity<?> tooShortException(Exception e){
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(WrongCodeException.class)
+	public ResponseEntity<?> wrongCodeException(Exception e){
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(InsufficientStockException.class)
+	public ResponseEntity<?> insufficientStockException(Exception e){
+		return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 }

@@ -1,11 +1,14 @@
 package com.example.Facturacion.entities;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,13 +18,23 @@ public class InvoiceModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date created_at;
+	@NotNull
+    private LocalDate created_at = LocalDate.now();
+	@NotNull
 	@Min(0)
-    private double total;
+    private Double total=0.00;
+	@JsonBackReference("clientsModel")
     @ManyToOne
     @JoinColumn(name="client_id")
-     private ClientsModel clientsModel;
+     private ClientsModel clients;
 	@NotNull
 	private boolean status =true;
+	@JsonManagedReference
+	@OneToMany(mappedBy = "invoice")
+	private List<InvoiceDetailsModel> invoiceDetails;
+
+
+
+
 
 }

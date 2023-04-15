@@ -1,5 +1,6 @@
 package com.example.Facturacion.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -13,16 +14,25 @@ public class InvoiceDetailsModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long invoiceDetailsId;
+	@NotNull
 	@Min(0)
-    private int amount;
+    private Integer amount;
+	@NotNull
 	@Min(0)
-    private double price;
+    private Double price;
+	@JsonBackReference
     @ManyToOne
     @JoinColumn(name="invoice_id")
-    private InvoiceModel invoiceModel;
-    @ManyToOne
+    private InvoiceModel invoice;
+	@NotNull
+	@Min(0)
+	private Double productPrice;
+	@ManyToOne
     @JoinColumn(name="product_id")
     private ProductsModel product;
 	@NotNull
 	private boolean status =true;
+
+	@Transient
+	private long invoiceId;
 }
