@@ -19,7 +19,7 @@ public class InvoiceModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	@NotNull
-    private LocalDate created_at = LocalDate.now();
+    private LocalDate createdAt = LocalDate.now();
 	@NotNull
 	@Min(0)
     private Double total=0.00;

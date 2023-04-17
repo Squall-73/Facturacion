@@ -37,7 +37,7 @@ public class InvoiceService {
 
 		InvoiceValidator.invoiceValidator(newInvoice);
 
-		newInvoice.setCreated_at(LocalDate.now());
+		newInvoice.setCreatedAt(LocalDate.now());
 
 		for(int i =0; i<newInvoice.getInvoiceDetails().size();i++){
 

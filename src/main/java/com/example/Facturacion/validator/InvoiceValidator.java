@@ -10,7 +10,7 @@ public class InvoiceValidator {
 
 	public static void invoiceValidator(InvoiceModel newInvoice) throws Exception{
 
-		if(newInvoice.getCreated_at() == null){
+		if(newInvoice.getCreatedAt() == null){
 			log.info("La fecha de creación no puede estar vacía");
 			throw new NullException("La fecha de creación no puede estar vacía");
 		}

@@ -68,10 +68,3 @@ VALUES('A0001','Pan lactal',100,500.00),
       ('B0004','Suavizante para ropa',100,390.00),
       ('B0005','Trapo de piso',100,150.00);
 
-
-
-
-
-
-
-
